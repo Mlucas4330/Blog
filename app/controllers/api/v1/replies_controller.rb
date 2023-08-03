@@ -1,6 +1,6 @@
 class Api::V1::RepliesController < ApplicationController
   before_action :set_reply, only: %i[ like update destroy ]
-  before_action :authorize, except: :index
+  before_action :authenticate_user!, except: :index
 
   def index
     post = Post.find(params[:post_id])

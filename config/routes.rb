@@ -18,9 +18,8 @@ Rails.application.routes.draw do
       get 'comments/:id/like', to: 'comments#like'
       get 'replies/:id/like', to: 'replies#like'
 
-      namespace :auth do
-        post 'login', to: 'users#login'
-        post 'register', to: 'users#register'
+      scope :auth do
+        devise_for :users
       end
     end
   end

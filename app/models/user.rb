@@ -1,10 +1,12 @@
 class User < ApplicationRecord
-    has_secure_password
-    has_many :posts
-    has_many :comments
-    has_many :replies
+  devise :database_authenticatable, :jwt_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
 
-    validates :username, presence: true
-    validates :email, presence: true, uniqueness: true
-    validates :password, presence: true
+  has_many :posts
+  has_many :comments
+  has_many :replies
+
+  validates :username, presence: true
+  validates :email, presence: true, uniqueness: true
+  validates :password, presence: true
 end
