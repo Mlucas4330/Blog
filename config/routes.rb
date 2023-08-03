@@ -22,7 +22,7 @@ Rails.application.routes.draw do
       get 'replies/:id/like', to: 'replies#like'
 
       devise_for :users
-      post 'users/sign_up', to 'users#sign_up'
+      post 'users/sign_up', to: 'users#sign_up'
     end
   end
 end
