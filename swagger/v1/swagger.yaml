@@ -1,0 +1,438 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/auth/login":
+    post:
+      summary: login user
+      tags:
+      - Auth
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+              - username
+              - password
+  "/api/v1/auth/register":
+    post:
+      summary: register user
+      tags:
+      - Auth
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - username
+              - email
+              - password
+  "/api/v1/posts/{post_id}/comments":
+    parameters:
+    - name: post_id
+      in: path
+      description: post_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: list comments
+      tags:
+      - Comments
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create comment
+      tags:
+      - Comments
+      parameters:
+      - name: token
+        in: header
+        required: true
+        description: token
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+              required:
+              - body
+  "/api/v1/comments/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    - name: token
+      in: header
+      required: true
+      description: token
+      schema:
+        type: string
+    get:
+      summary: show comment
+      tags:
+      - Comments
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update comment
+      tags:
+      - Comments
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+              required:
+              - body
+    put:
+      summary: update comment
+      tags:
+      - Comments
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+              required:
+              - body
+    delete:
+      summary: delete comment
+      tags:
+      - Comments
+      responses:
+        '200':
+          description: successful
+  "/api/v1/comments/{id}/like":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    - name: token
+      in: header
+      required: true
+      description: token
+      schema:
+        type: string
+    get:
+      summary: like comment
+      tags:
+      - Comments
+      responses:
+        '200':
+          description: successful
+  "/api/v1/posts":
+    get:
+      summary: list posts
+      tags:
+      - Posts
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create post
+      tags:
+      - Posts
+      parameters:
+      - name: token
+        in: header
+        required: true
+        description: token
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                body:
+                  type: string
+              required:
+              - title
+              - body
+  "/api/v1/posts/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    - name: token
+      in: header
+      required: true
+      description: token
+      schema:
+        type: string
+    get:
+      summary: show post
+      tags:
+      - Posts
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update post
+      tags:
+      - Posts
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                body:
+                  type: string
+              required:
+              - title
+              - body
+    put:
+      summary: update post
+      tags:
+      - Posts
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                body:
+                  type: string
+              required:
+              - title
+              - body
+    delete:
+      summary: delete post
+      tags:
+      - Posts
+      responses:
+        '200':
+          description: successful
+  "/api/v1/posts/{id}/like":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    - name: token
+      in: header
+      required: true
+      description: token
+      schema:
+        type: string
+    get:
+      summary: like post
+      tags:
+      - Posts
+      responses:
+        '200':
+          description: successful
+  "/api/v1/posts/{post_id}/comments/{comment_id}/replies":
+    parameters:
+    - name: post_id
+      in: path
+      description: post_id
+      required: true
+      schema:
+        type: string
+    - name: comment_id
+      in: path
+      description: comment_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: list replies
+      tags:
+      - Replies
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create reply
+      tags:
+      - Replies
+      parameters:
+      - name: token
+        in: header
+        required: true
+        description: token
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+              required:
+              - body
+  "/api/v1/replies/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    - name: token
+      in: header
+      required: true
+      description: token
+      schema:
+        type: string
+    get:
+      summary: show reply
+      tags:
+      - Replies
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update reply
+      tags:
+      - Replies
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+              required:
+              - body
+    put:
+      summary: update reply
+      tags:
+      - Replies
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+              required:
+              - body
+    delete:
+      summary: delete reply
+      tags:
+      - Replies
+      responses:
+        '200':
+          description: successful
+  "/api/v1/replies/{id}/like":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    - name: token
+      in: header
+      required: true
+      description: token
+      schema:
+        type: string
+    get:
+      summary: like reply
+      tags:
+      - Replies
+      responses:
+        '200':
+          description: successful
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com
