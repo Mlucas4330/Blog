@@ -14,13 +14,13 @@ default: &default
 
 development:
   <<: *default
-  database: blog_v4_dev
+  database: blog_v4_uvr1_dev
 test:
   <<: *default
-  database: blog_v4_test
+  database: blog_v4_uvr1_test
 
 production:
   <<: *default
-  database: blog_v4
+  database: blog_v4_uvr1
   url: <%= ENV['DATABASE_URL'] %>
 
