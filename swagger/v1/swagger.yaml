@@ -51,11 +51,11 @@ paths:
               - username
               - email
               - password
-  "/api/v1/logout":
+  "/api/v1/logout": 
     delete:
     summary: logout
     tags:
-    - Auth
+    - Logout
     responses:
       '200':
         description: successful
