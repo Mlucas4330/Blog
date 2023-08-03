@@ -25,7 +25,7 @@ class Api::V1::RepliesController < ApplicationController
   end
 
   def create
-    @reply = @user.replies.new(reply_params)
+    @reply = current_user.replies.new(reply_params)
   
     if @reply.save
       render status: :created

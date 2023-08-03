@@ -21,8 +21,15 @@ Rails.application.routes.draw do
       get 'comments/:id/like', to: 'comments#like'
       get 'replies/:id/like', to: 'replies#like'
 
-      devise_for :users
-      post 'users/sign_up', to: 'users#sign_up'
+      devise_for :users, path: '', path_names: {
+        sign_in: 'login',
+        sign_out: 'logout',
+        registration: 'signup'
+      },
+      controllers: {
+        sessions: 'users/sessions',
+        registrations: 'users/registrations'
+      }
     end
   end
 end

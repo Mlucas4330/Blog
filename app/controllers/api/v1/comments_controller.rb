@@ -25,7 +25,7 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def create
-    @comment = @user.comments.new(comment_params)
+    @comment = current_user.comments.new(comment_params)
 
   if @comment.save
     render status: :created

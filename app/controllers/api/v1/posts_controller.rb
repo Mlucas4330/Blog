@@ -23,7 +23,7 @@ def show
 end
 
 def create
-  @post = @user.posts.new(post_params)
+  @post = current_user.posts.new(post_params)
 
   if @post.save
     render json: { message: 'Publicação criada com sucesso' }, status: :created

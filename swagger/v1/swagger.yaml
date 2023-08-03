@@ -4,9 +4,9 @@ info:
   title: API V1
   version: v1
 paths:
-  "/api/v1/users/sign_in":
+  "/api/v1/login":
     post:
-      summary: sign_in user
+      summary: login
       tags:
       - Auth
       parameters: []
@@ -26,11 +26,11 @@ paths:
               required:
               - email
               - password
-  "/api/v1/users/sign_up":
+  "/api/v1/signup":
     post:
-      summary: sign_up user
+      summary: signup
       tags:
-      - Auth
+      - Register
       parameters: []
       responses:
         '200':
@@ -51,6 +51,14 @@ paths:
               - username
               - email
               - password
+  "/api/v1/logout":
+    delete:
+    summary: logout
+    tags:
+    - Auth
+    responses:
+      '200':
+        description: successful
   "/api/v1/posts/{post_id}/comments":
     parameters:
     - name: post_id
