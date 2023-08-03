@@ -1,17 +1,17 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/auth/users', type: :request do
-  path '/api/v1/auth/login' do
-    post('login user') do
+  path '/api/v1/users/sign_in' do
+    post('sign_in user') do
       tags 'Auth'
       consumes 'application/json'
       parameter name: :user, in: :body, schema: {
         type: :object,
         properties: {
-          username: { type: :string },
+          email: { type: :string },
           password: { type: :string }
         },
-        required: [ 'username','password' ]
+        required: [ 'email','password' ]
       }
       response(200, 'successful') do
         after do |example|
@@ -26,8 +26,8 @@ RSpec.describe 'api/v1/auth/users', type: :request do
     end
   end
 
-  path '/api/v1/auth/register' do
-    post('register user') do
+  path '/api/v1/users/sign_up' do
+    post('sign_up user') do
       tags 'Auth'
       consumes 'application/json'
       parameter name: :user, in: :body, schema: {

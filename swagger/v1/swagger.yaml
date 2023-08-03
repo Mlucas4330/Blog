@@ -4,9 +4,9 @@ info:
   title: API V1
   version: v1
 paths:
-  "/api/v1/auth/login":
+  "/api/v1/users/sign_in":
     post:
-      summary: login user
+      summary: sign_in user
       tags:
       - Auth
       parameters: []
@@ -19,16 +19,16 @@ paths:
             schema:
               type: object
               properties:
-                username:
+                email:
                   type: string
                 password:
                   type: string
               required:
-              - username
+              - email
               - password
-  "/api/v1/auth/register":
+  "/api/v1/users/sign_up":
     post:
-      summary: register user
+      summary: sign_up user
       tags:
       - Auth
       parameters: []

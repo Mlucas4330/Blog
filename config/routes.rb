@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
+
+  root to: redirect('/api-docs')
+
   namespace :api do
     namespace :v1 do
 
@@ -18,9 +21,8 @@ Rails.application.routes.draw do
       get 'comments/:id/like', to: 'comments#like'
       get 'replies/:id/like', to: 'replies#like'
 
-      scope :auth do
-        devise_for :users
-      end
+      devise_for :users
+      post 'users/sign_up', to 'users#sign_up'
     end
   end
 end
