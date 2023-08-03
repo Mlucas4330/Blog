@@ -71,10 +71,10 @@ paths:
       tags:
       - Comments
       parameters:
-      - name: token
+      - name: Authorization
         in: header
         required: true
-        description: token
+        description: Authorization token
         schema:
           type: string
       responses:
@@ -98,10 +98,10 @@ paths:
       required: true
       schema:
         type: string
-    - name: token
+    - name: Authorization
       in: header
       required: true
-      description: token
+      description: Authorization token
       schema:
         type: string
     get:
@@ -162,10 +162,10 @@ paths:
       required: true
       schema:
         type: string
-    - name: token
+    - name: Authorization
       in: header
       required: true
-      description: token
+      description: Authorization token
       schema:
         type: string
     get:
@@ -188,10 +188,10 @@ paths:
       tags:
       - Posts
       parameters:
-      - name: token
+      - name: Authorization
         in: header
         required: true
-        description: token
+        description: Authorization token
         schema:
           type: string
       responses:
@@ -218,10 +218,10 @@ paths:
       required: true
       schema:
         type: string
-    - name: token
+    - name: Authorization
       in: header
       required: true
-      description: token
+      description: Authorization token
       schema:
         type: string
     get:
@@ -288,10 +288,10 @@ paths:
       required: true
       schema:
         type: string
-    - name: token
+    - name: Authorization
       in: header
       required: true
-      description: token
+      description: Authorization token
       schema:
         type: string
     get:
@@ -327,10 +327,10 @@ paths:
       tags:
       - Replies
       parameters:
-      - name: token
+      - name: Authorization
         in: header
         required: true
-        description: token
+        description: Authorization token
         schema:
           type: string
       responses:
@@ -354,10 +354,10 @@ paths:
       required: true
       schema:
         type: string
-    - name: token
+    - name: Authorization
       in: header
       required: true
-      description: token
+      description: Authorization token
       schema:
         type: string
     get:
@@ -418,10 +418,10 @@ paths:
       required: true
       schema:
         type: string
-    - name: token
+    - name: Authorization
       in: header
       required: true
-      description: token
+      description: Authorization token
       schema:
         type: string
     get:
