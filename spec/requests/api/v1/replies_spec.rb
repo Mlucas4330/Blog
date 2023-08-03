@@ -33,7 +33,7 @@ RSpec.describe 'api/v1/replies', type: :request do
         },
         required: [ 'body' ]
       }
-      parameter name: 'token', in: :header, type: :string, required: true, description: 'token'
+      parameter name: 'Authorization', in: :header, type: :string, required: true, description: 'Authorization'
       response(200, 'successful') do
         let(:post_id) { '123' }
         let(:comment_id) { '123' }
@@ -52,7 +52,7 @@ RSpec.describe 'api/v1/replies', type: :request do
 
   path '/api/v1/replies/{id}' do
     parameter name: 'id', in: :path, type: :string, description: 'id'
-    parameter name: 'token', in: :header, type: :string, required: true, description: 'token'
+    parameter name: 'Authorization', in: :header, type: :string, required: true, description: 'Authorization'
     get('show reply') do
       tags 'Replies'
       consumes 'application/json'
@@ -138,7 +138,7 @@ RSpec.describe 'api/v1/replies', type: :request do
 
   path '/api/v1/replies/{id}/like' do
     parameter name: 'id', in: :path, type: :string, description: 'id'
-    parameter name: 'token', in: :header, type: :string, required: true, description: 'token'
+    parameter name: 'Authorization', in: :header, type: :string, required: true, description: 'Authorization'
     get('like reply') do
       tags 'Replies'
       consumes 'application/json'
