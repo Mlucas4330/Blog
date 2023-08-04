@@ -8,7 +8,6 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
-      bearerFormat: JWT
 paths:
     '/api/v1/auth/login':
         post:

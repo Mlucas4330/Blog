@@ -25,7 +25,7 @@ RSpec.describe 'api/v1/comments', type: :request do
     post('create comment') do
       tags 'Comments'
       consumes 'application/json'
-      parameter name: 'Authorization', in: :header, type: :string, required: true, description: 'Authorization token'
+  
       parameter name: :comment, in: :body, schema: {
         type: :object,
         properties: {
@@ -70,7 +70,7 @@ RSpec.describe 'api/v1/comments', type: :request do
     patch('update comment') do
       tags 'Comments'
       consumes 'application/json'
-      parameter name: 'Authorization', in: :header, type: :string, required: true, description: 'Authorization token'
+  
       parameter name: :comment, in: :body, schema: {
         type: :object,
         properties: {
@@ -95,7 +95,7 @@ RSpec.describe 'api/v1/comments', type: :request do
     put('update comment') do
       tags 'Comments'
       consumes 'application/json'
-      parameter name: 'Authorization', in: :header, type: :string, required: true, description: 'Authorization token'
+  
       parameter name: :comment, in: :body, schema: {
         type: :object,
         properties: {
@@ -120,7 +120,7 @@ RSpec.describe 'api/v1/comments', type: :request do
     delete('delete comment') do
       tags 'Comments'
       consumes 'application/json'
-      parameter name: 'Authorization', in: :header, type: :string, required: true, description: 'Authorization token'
+  
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -138,7 +138,7 @@ RSpec.describe 'api/v1/comments', type: :request do
 
   path '/api/v1/comments/{id}/like' do
     parameter name: 'id', in: :path, type: :string, description: 'id'
-    parameter name: 'Authorization', in: :header, type: :string, required: true, description: 'Authorization token'
+
     get('like comment') do
       tags 'Comments'
       consumes 'application/json'
