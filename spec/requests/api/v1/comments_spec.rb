@@ -25,6 +25,7 @@ RSpec.describe 'api/v1/comments', type: :request do
     post('create comment') do
       tags 'Comments'
       consumes 'application/json'
+      parameter name: 'token', in: :header, type: :string, required: true, description: 'token'
       parameter name: :comment, in: :body, schema: {
         type: :object,
         properties: {
@@ -32,7 +33,6 @@ RSpec.describe 'api/v1/comments', type: :request do
         },
         required: [ 'body' ]
       }
-      parameter name: 'token', in: :header, type: :string, required: true, description: 'token'
       response(200, 'successful') do
         let(:post_id) { '123' }
 
@@ -50,7 +50,6 @@ RSpec.describe 'api/v1/comments', type: :request do
 
   path '/api/v1/comments/{id}' do
     parameter name: 'id', in: :path, type: :string, description: 'id'
-    parameter name: 'token', in: :header, type: :string, required: true, description: 'token'
     get('show comment') do
       tags 'Comments'
       consumes 'application/json'
@@ -71,6 +70,7 @@ RSpec.describe 'api/v1/comments', type: :request do
     patch('update comment') do
       tags 'Comments'
       consumes 'application/json'
+      parameter name: 'token', in: :header, type: :string, required: true, description: 'token'
       parameter name: :comment, in: :body, schema: {
         type: :object,
         properties: {
@@ -95,6 +95,7 @@ RSpec.describe 'api/v1/comments', type: :request do
     put('update comment') do
       tags 'Comments'
       consumes 'application/json'
+      parameter name: 'token', in: :header, type: :string, required: true, description: 'token'
       parameter name: :comment, in: :body, schema: {
         type: :object,
         properties: {
@@ -119,6 +120,7 @@ RSpec.describe 'api/v1/comments', type: :request do
     delete('delete comment') do
       tags 'Comments'
       consumes 'application/json'
+      parameter name: 'token', in: :header, type: :string, required: true, description: 'token'
       response(200, 'successful') do
         let(:id) { '123' }
 

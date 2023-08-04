@@ -26,6 +26,7 @@ RSpec.describe 'api/v1/replies', type: :request do
     post('create reply') do
       tags 'Replies'
       consumes 'application/json'
+      parameter name: 'token', in: :header, type: :string, required: true, description: 'token'
       parameter name: :reply, in: :body, schema: {
         type: :object,
         properties: {
@@ -33,7 +34,6 @@ RSpec.describe 'api/v1/replies', type: :request do
         },
         required: [ 'body' ]
       }
-      parameter name: 'token', in: :header, type: :string, required: true, description: 'token'
       response(200, 'successful') do
         let(:post_id) { '123' }
         let(:comment_id) { '123' }
@@ -52,7 +52,6 @@ RSpec.describe 'api/v1/replies', type: :request do
 
   path '/api/v1/replies/{id}' do
     parameter name: 'id', in: :path, type: :string, description: 'id'
-    parameter name: 'token', in: :header, type: :string, required: true, description: 'token'
     get('show reply') do
       tags 'Replies'
       consumes 'application/json'
@@ -73,6 +72,7 @@ RSpec.describe 'api/v1/replies', type: :request do
     patch('update reply') do
       tags 'Replies'
       consumes 'application/json'
+      parameter name: 'token', in: :header, type: :string, required: true, description: 'token'
       parameter name: :reply, in: :body, schema: {
         type: :object,
         properties: {
@@ -97,6 +97,7 @@ RSpec.describe 'api/v1/replies', type: :request do
     put('update reply') do
       tags 'Replies'
       consumes 'application/json'
+      parameter name: 'token', in: :header, type: :string, required: true, description: 'token'
       parameter name: :reply, in: :body, schema: {
         type: :object,
         properties: {
@@ -121,6 +122,7 @@ RSpec.describe 'api/v1/replies', type: :request do
     delete('delete reply') do
       tags 'Replies'
       consumes 'application/json'
+      parameter name: 'token', in: :header, type: :string, required: true, description: 'token'
       response(200, 'successful') do
         let(:id) { '123' }
 
