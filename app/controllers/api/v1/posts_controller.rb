@@ -24,7 +24,7 @@ end
 
 def create
   authorize()
-
+  return
   render json: @user.inspect
   return 
   @post = @user.posts.new(post_params)
