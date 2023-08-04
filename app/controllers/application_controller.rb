@@ -11,14 +11,18 @@ class ApplicationController < ActionController::API
             token = auth_header.split(' ').last
             begin
                 JWT.decode(token, JWT_SECRET, true, algorithm: 'HS256')
-            rescue JWT::DecodeError
-                nil
+            rescue JWT::DecodeError => e
+                { error: 'Invalid JWT token', details: e.message }
             end
+        else
+            'No token provided'
         end
     end
 
     def authorized_user
         decoded_token = decode_token()
+        return decoded_token
+
         if decoded_token
             user_id = decoded_token[0]['user_id']
             @user = User.find_by(id: user_id)
