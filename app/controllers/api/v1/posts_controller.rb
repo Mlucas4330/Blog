@@ -1,14 +1,14 @@
 class Api::V1::PostsController < ApplicationController
 before_action :set_post, only: %i[ like update destroy ]
-before_action :authorize, except: :index
+before_action :authorize, except: %i[ index show ]
 
 def index
   @posts = Post.all
 
   if @posts.empty?
-    render status: :no_content
+    render json: { message: 'No post found'}, status: :no_content
   else
-    render json: @posts
+    render json: { posts: @posts, message: "#{@posts.length} posts found" }, status: :ok
   end
 end
 
@@ -16,9 +16,9 @@ def show
   @post = Post.where(:id => params[:id])
 
   if @post.exists?
-    render json: @post
+    render json: { post: @post }, include: { comments: { include: :replies } }, status: :ok
   else
-    render json: { message: 'Publicação não foi encontrada' }, status: :not_found
+    render json: { message: 'Post not found' }, status: :not_found
   end
 end
 
@@ -26,27 +26,28 @@ def create
   @post = @user.posts.new(post_params)
 
   if @post.save
-    render json: { message: 'Publicação criada com sucesso' }, status: :created
+    render json: { post: @post, message: 'Post created successfully' }, status: :created
   else
-    render json: { errors: @post.errors }, status: :unprocessable_entity
+    render json: { error: @post.errors }, status: :unprocessable_entity
   end
 end
 
 def update
     if @post.update(post_params)
-        render json: { message: 'Publicação editada com sucesso' }
+        render json: { message: 'Post edited successfully' }, status: :ok
     else
-        render json: { errors: @post.errors }, status: :unprocessable_entity
+        render json: { error: @post.errors }, status: :unprocessable_entity
     end
 end
 
 def destroy
   @post.destroy
-  render json: { message: 'Publicação excluída com sucesso' }
+  render json: { message: 'Post deleted successfully' }, status: :ok
 end
 
 def like
   @post.increment!(:likes)
+  render json: { message: 'Post liked successfully'}, status: :ok
 end
 
 private

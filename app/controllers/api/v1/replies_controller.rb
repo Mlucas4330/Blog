@@ -1,53 +1,33 @@
 class Api::V1::RepliesController < ApplicationController
   before_action :set_reply, only: %i[ like update destroy ]
-  before_action :authorize, except: :index
-
-  def index
-    Comment.find(reply_params[:comment_id])
-    @replies = comment.replies
-
-    if @replies.empty?
-      render status: :no_content
-    else
-      render json: @replies
-    end
-  end
-
-  def show
-    @reply = Reply.where(:id => params[:id])
-
-    if @reply.exists?
-      render json: @reply 
-    else
-      render json: { message: 'Resposta não foi encontrada' }, status: :not_found
-    end
-  end
+  before_action :authorize
 
   def create
     @reply = @user.replies.new(reply_params)
   
     if @reply.save
-      render status: :created
+      render json: { reply: @reply, message: 'Reply created successfully' }, status: :created
     else
-      render json: { errors: @reply.errors }, status: :unprocessable_entity
+      render json: { error: @reply.errors }, status: :unprocessable_entity
     end
   end
   
   def update
     if @reply.update(reply_params)
-        render status: :ok
+        render json: { reply: @reply, message: 'Reply edited successfully' }, status: :ok
     else
-        render json: { errors: @reply.errors }, status: :unprocessable_entity
+        render json: { error: @reply.errors }, status: :unprocessable_entity
     end
   end
   
   def destroy
     @reply.destroy
-    render json: { message: 'Resposta excluída com sucesso' }
+    render json: { message: 'Reply deleted successfully' }
   end
 
   def like
     @reply.increment!(:likes)
+    render json: { message: 'Reply liked successfully' }, status: :ok
   end
 
   private

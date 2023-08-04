@@ -1,54 +1,33 @@
 class Api::V1::CommentsController < ApplicationController
   before_action :set_comment, only: %i[ like update destroy ]
-  before_action :authorize, except: :index
-
-  def index
-    post = Post.find(comment_params[:post_id])
-    @comments = post.comments
-
-    if @comments.empty?
-      render status: :no_content
-    else
-      render json: @comments, include: :replies
-    end
-  end
-
-  def show
-    @comment = Comment.where(:id => params[:id])
-
-    if @comment.exists?
-      render json: @comment, include: :replies
-      
-    else
-      render json: { message: 'Comentário não foi encontrado' }, status: :not_found
-    end
-  end
+  before_action :authorize
 
   def create
     @comment = @user.comments.new(comment_params)
 
   if @comment.save
-    render status: :created
+    render json: { comment: @comment, message: 'Comment created successfuly' }, status: :created
   else
-    render json: { errors: @comment.errors }, status: :unprocessable_entity
+    render json: { error: @comment.errors }, status: :unprocessable_entity
   end
   end
 
   def update
     if @comment.update(comment_params)
-        render status: :ok
+        render json: { comment: @comment, message: 'Comment edited successfuly' }, status: :ok
     else
-        render json: { errors: @comment.errors }, status: :unprocessable_entity
+        render json: { error: @comment.errors }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @comment.destroy
-    render json: { message: 'Comentário excluído com sucesso' }, status: :ok
+    render json: { message: 'Comment deleted successfuly' }, status: :ok
   end
 
   def like
     @comment.increment!(:likes)
+    render json: { message: 'Comment liked successfuly'}, status: :ok
   end
 
 

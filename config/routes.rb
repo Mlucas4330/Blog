@@ -5,8 +5,8 @@ Rails.application.routes.draw do
     namespace :v1 do
 
       resources :posts
-      resources :comments
-      resources :replies
+      resources :comments, except: %i[ index show ]
+      resources :replies, except: %i[ index show ]
      
       get 'posts/:id/like', to: 'posts#like'
       get 'comments/:id/like', to: 'comments#like'

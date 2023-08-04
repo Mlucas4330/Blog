@@ -58,13 +58,6 @@ paths:
               - email
               - password
   "/api/v1/comments":
-    get:
-      summary: list comments
-      tags:
-      - Comments
-      responses:
-        '200':
-          description: successful
     post:
       summary: create comment
       security:
@@ -98,13 +91,6 @@ paths:
       required: true
       schema:
         type: string
-    get:
-      summary: show comment
-      tags:
-      - Comments
-      responses:
-        '200':
-          description: successful
     patch:
       summary: update comment
       security:
@@ -292,13 +278,6 @@ paths:
         '200':
           description: successful
   "/api/v1/replies":
-    get:
-      summary: list replies
-      tags:
-      - Replies
-      responses:
-        '200':
-          description: successful
     post:
       summary: create reply
       security:
@@ -332,13 +311,6 @@ paths:
       required: true
       schema:
         type: string
-    get:
-      summary: show reply
-      tags:
-      - Replies
-      responses:
-        '200':
-          description: successful
     patch:
       summary: update reply
       security:
