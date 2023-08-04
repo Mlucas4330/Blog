@@ -12,10 +12,10 @@ class ApplicationController < ActionController::API
             begin
                 JWT.decode(token, ENV['JWT_SECRET_KEY'], true, algorithm: 'HS256')
             rescue JWT::DecodeError => e
-                { errors: e.message }
+                return render json: { errors: e.message }
             end
         else
-            { errors: 'Authorization header format is invalid' }
+            render json: { errors: 'Authorization header format is invalid' }
         end
     end
 
@@ -28,6 +28,6 @@ class ApplicationController < ActionController::API
     end
 
     def authorize
-        { message: 'Você precisa estar logado' }, status: :unauthorized unless authorized_user
+        render json: {message: 'Você precisa estar logado'}, status: :unauthorized unless authorized_user
     end
 end
