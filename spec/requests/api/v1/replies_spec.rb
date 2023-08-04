@@ -1,17 +1,12 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/replies', type: :request do
-  path '/api/v1/posts/{post_id}/comments/{comment_id}/replies' do
-    parameter name: 'post_id', in: :path, type: :string, description: 'post_id'
-    parameter name: 'comment_id', in: :path, type: :string, description: 'comment_id'
+  path '/api/v1/replies' do
 
     get('list replies') do
       tags 'Replies'
       consumes 'application/json'
       response(200, 'successful') do
-        let(:post_id) { '123' }
-        let(:comment_id) { '123' }
-
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -26,18 +21,15 @@ RSpec.describe 'api/v1/replies', type: :request do
     post('create reply') do
       tags 'Replies'
       consumes 'application/json'
-      parameter name: 'Authorization', in: :header, type: :string, required: true, description: 'Authorization token'
       parameter name: :reply, in: :body, schema: {
         type: :object,
         properties: {
-          body: { type: :string }
+          body: { type: :string },
+          comment_id: { type: :string }
         },
-        required: [ 'body' ]
+        required: [ 'body', 'comment_id' ]
       }
       response(200, 'successful') do
-        let(:post_id) { '123' }
-        let(:comment_id) { '123' }
-
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -72,7 +64,6 @@ RSpec.describe 'api/v1/replies', type: :request do
     patch('update reply') do
       tags 'Replies'
       consumes 'application/json'
-      parameter name: 'Authorization', in: :header, type: :string, required: true, description: 'Authorization token'
       parameter name: :reply, in: :body, schema: {
         type: :object,
         properties: {
@@ -97,7 +88,6 @@ RSpec.describe 'api/v1/replies', type: :request do
     put('update reply') do
       tags 'Replies'
       consumes 'application/json'
-      parameter name: 'Authorization', in: :header, type: :string, required: true, description: 'Authorization token'
       parameter name: :reply, in: :body, schema: {
         type: :object,
         properties: {
@@ -122,7 +112,6 @@ RSpec.describe 'api/v1/replies', type: :request do
     delete('delete reply') do
       tags 'Replies'
       consumes 'application/json'
-      parameter name: 'Authorization', in: :header, type: :string, required: true, description: 'Authorization token'
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -140,13 +129,11 @@ RSpec.describe 'api/v1/replies', type: :request do
 
   path '/api/v1/replies/{id}/like' do
     parameter name: 'id', in: :path, type: :string, description: 'id'
-    parameter name: 'Authorization', in: :header, type: :string, required: true, description: 'Authorization token'
     get('like reply') do
       tags 'Replies'
       consumes 'application/json'
       response(200, 'successful') do
         let(:id) { '123' }
-
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {

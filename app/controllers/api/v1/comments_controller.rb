@@ -3,7 +3,7 @@ class Api::V1::CommentsController < ApplicationController
   before_action :authorize, except: :index
 
   def index
-    post = Post.find(params[:post_id])
+    post = Post.find(comment_params[:post_id])
     @comments = post.comments
 
     if @comments.empty?

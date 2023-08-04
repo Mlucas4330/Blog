@@ -13,13 +13,6 @@ class Api::V1::Auth::UsersController < ApplicationController
   def register
     @user = User.new(user_params)
 
-    user = User.find_by(username: user_params[:username])
-
-    if user 
-      render json: {message: 'Usuário já cadastrado'}, status: :conflict
-      return
-    end
-  
     if @user.save
       token = encode_token({user_id: @user.id})
       render json: {user: @user, token: token}, status: :created

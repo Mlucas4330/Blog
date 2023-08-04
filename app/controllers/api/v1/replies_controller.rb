@@ -3,8 +3,7 @@ class Api::V1::RepliesController < ApplicationController
   before_action :authorize, except: :index
 
   def index
-    post = Post.find(params[:post_id])
-    comment = post.comments.find(params[:comment_id])
+    Comment.find(reply_params[:comment_id])
     @replies = comment.replies
 
     if @replies.empty?
@@ -56,6 +55,6 @@ class Api::V1::RepliesController < ApplicationController
     @reply = Reply.find(params[:id])
   end
   def reply_params
-    params.permit(:body, :post_id, :comment_id)
+    params.permit(:body, :comment_id)
   end
 end

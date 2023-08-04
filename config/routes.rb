@@ -4,15 +4,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
 
-      resources :posts, only: %i[ index create ] do
-        resources :comments, only: %i[ index create ] do
-          resources :replies, only: %i[ index create ]
-        end
-      end
-
-      resources :comments, except: %i[create index]
       resources :posts
-      resources :replies, except: %i[create index]
+      resources :comments
+      resources :replies
      
       get 'posts/:id/like', to: 'posts#like'
       get 'comments/:id/like', to: 'comments#like'

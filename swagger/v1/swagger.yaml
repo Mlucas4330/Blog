@@ -10,463 +10,397 @@ components:
         scheme: bearer
         bearerFormat: JWT 
 paths:
-    '/api/v1/auth/login':
-        post:
-            summary: login user
-            tags:
-                - Auth
-            parameters: []
-            responses:
-                '200':
-                    description: successful
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                username:
-                                    type: string
-                                password:
-                                    type: string
-                            required:
-                                - username
-                                - password
-    '/api/v1/auth/register':
-        post:
-            summary: register user
-            tags:
-                - Auth
-            parameters: []
-            responses:
-                '200':
-                    description: successful
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                username:
-                                    type: string
-                                email:
-                                    type: string
-                                password:
-                                    type: string
-                            required:
-                                - username
-                                - email
-                                - password
-    '/api/v1/posts/{post_id}/comments':
-        parameters:
-            - name: post_id
-              in: path
-              description: post_id
-              required: true
-              schema:
+  "/api/v1/auth/login":
+    post:
+      summary: login user
+      tags:
+      - Auth
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
                   type: string
-        get:
-            summary: list comments
-            tags:
-                - Comments
-            responses:
-                '200':
-                    description: successful
-        post:
-            summary: create comment
-            security:
-                - bearerAuth: []
-            tags:
-                - Comments
-            parameters:
-                - name: Authorization
-                  in: header
-                  required: true
-                  description: Authorization token
-                  schema:
-                      type: string
-            responses:
-                '200':
-                    description: successful
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                body:
-                                    type: string
-                            required:
-                                - body
-    '/api/v1/comments/{id}':
-        parameters:
-            - name: id
-              in: path
-              description: id
-              required: true
-              schema:
+                password:
                   type: string
-            - name: Authorization
-              in: header
-              required: true
-              description: Authorization token
-              schema:
+              required:
+              - username
+              - password
+  "/api/v1/auth/register":
+    post:
+      summary: register user
+      tags:
+      - Auth
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
                   type: string
-        get:
-            summary: show comment
-            tags:
-                - Comments
-            responses:
-                '200':
-                    description: successful
-        patch:
-            summary: update comment
-            security:
-                - bearerAuth: []
-            tags:
-                - Comments
-            parameters: []
-            responses:
-                '200':
-                    description: successful
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                body:
-                                    type: string
-                            required:
-                                - body
-        put:
-            summary: update comment
-            security:
-                - bearerAuth: []
-            tags:
-                - Comments
-            parameters: []
-            responses:
-                '200':
-                    description: successful
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                body:
-                                    type: string
-                            required:
-                                - body
-        delete:
-            summary: delete comment
-            security:
-                - bearerAuth: []
-            tags:
-                - Comments
-            responses:
-                '200':
-                    description: successful
-    '/api/v1/comments/{id}/like':
-        parameters:
-            - name: id
-              in: path
-              description: id
-              required: true
-              schema:
+                email:
                   type: string
-            - name: Authorization
-              in: header
-              required: true
-              description: Authorization token
-              schema:
+                password:
                   type: string
-        get:
-            summary: like comment
-            security:
-                - bearerAuth: []
-            tags:
-                - Comments
-            responses:
-                '200':
-                    description: successful
-    '/api/v1/posts':
-        get:
-            summary: list posts
-            tags:
-                - Posts
-            responses:
-                '200':
-                    description: successful
-        post:
-            summary: create post
-            security:
-                - bearerAuth: []
-            tags:
-                - Posts
-            parameters:
-                - name: Authorization
-                  in: header
-                  required: true
-                  description: Authorization token
-                  schema:
-                      type: string
-            responses:
-                '200':
-                    description: successful
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                title:
-                                    type: string
-                                body:
-                                    type: string
-                            required:
-                                - title
-                                - body
-    '/api/v1/posts/{id}':
-        parameters:
-            - name: id
-              in: path
-              description: id
-              required: true
-              schema:
+              required:
+              - username
+              - email
+              - password
+  "/api/v1/comments":
+    get:
+      summary: list comments
+      tags:
+      - Comments
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create comment
+      security:
+        - bearerAuth: []
+      tags:
+      - Comments
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
                   type: string
-            - name: Authorization
-              in: header
-              required: true
-              description: Authorization token
-              schema:
+                post_id:
                   type: string
-        get:
-            summary: show post
-            tags:
-                - Posts
-            responses:
-                '200':
-                    description: successful
-        patch:
-            summary: update post
-            security:
-              - bearerAuth: []
-            tags:
-                - Posts
-            parameters: []
-            responses:
-                '200':
-                    description: successful
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                title:
-                                    type: string
-                                body:
-                                    type: string
-                            required:
-                                - title
-                                - body
-        put:
-            summary: update post
-            security:
-              - bearerAuth: []
-            tags:
-                - Posts
-            parameters: []
-            responses:
-                '200':
-                    description: successful
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                title:
-                                    type: string
-                                body:
-                                    type: string
-                            required:
-                                - title
-                                - body
-        delete:
-            summary: delete post
-            security:
-              - bearerAuth: []
-            tags:
-                - Posts
-            responses:
-                '200':
-                    description: successful
-    '/api/v1/posts/{id}/like':
-        parameters:
-            - name: id
-              in: path
-              description: id
-              required: true
-              schema:
+              required:
+              - body
+              - post_id
+  "/api/v1/comments/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show comment
+      tags:
+      - Comments
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update comment
+      security:
+        - bearerAuth: []
+      tags:
+      - Comments
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
                   type: string
-            - name: Authorization
-              in: header
-              required: true
-              description: Authorization token
-              schema:
+              required:
+              - body
+    put:
+      summary: update comment
+      security:
+        - bearerAuth: []
+      tags:
+      - Comments
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
                   type: string
-        get:
-            summary: like post
-            tags:
-                - Posts
-            responses:
-                '200':
-                    description: successful
-    '/api/v1/posts/{post_id}/comments/{comment_id}/replies':
-        parameters:
-            - name: post_id
-              in: path
-              description: post_id
-              required: true
-              schema:
+              required:
+              - body
+    delete:
+      summary: delete comment
+      security:
+        - bearerAuth: []
+      tags:
+      - Comments
+      responses:
+        '200':
+          description: successful
+  "/api/v1/comments/{id}/like":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: like comment
+      security:
+        - bearerAuth: []
+      tags:
+      - Comments
+      responses:
+        '200':
+          description: successful
+  "/api/v1/posts":
+    get:
+      summary: list posts
+      tags:
+      - Posts
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create post
+      security:
+        - bearerAuth: []
+      tags:
+      - Posts
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
                   type: string
-            - name: comment_id
-              in: path
-              description: comment_id
-              required: true
-              schema:
+                body:
                   type: string
-        get:
-            summary: list replies
-            tags:
-                - Replies
-            responses:
-                '200':
-                    description: successful
-        post:
-            summary: create reply
-            security:
-                - bearerAuth: []
-            tags:
-                - Replies
-            parameters:
-                - name: Authorization
-                  in: header
-                  required: true
-                  description: Authorization token
-                  schema:
-                      type: string
-            responses:
-                '200':
-                    description: successful
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                body:
-                                    type: string
-                            required:
-                                - body
-    '/api/v1/replies/{id}':
-        parameters:
-            - name: id
-              in: path
-              description: id
-              required: true
-              schema:
+              required:
+              - title
+              - body
+  "/api/v1/posts/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show post
+      tags:
+      - Posts
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update post
+      security:
+        - bearerAuth: []
+      tags:
+      - Posts
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
                   type: string
-            - name: Authorization
-              in: header
-              required: true
-              description: Authorization token
-              schema:
+                body:
                   type: string
-        get:
-            summary: show reply
-            tags:
-                - Replies
-            responses:
-                '200':
-                    description: successful
-        patch:
-            summary: update reply
-            security:
-                - bearerAuth: []
-            tags:
-                - Replies
-            parameters: []
-            responses:
-                '200':
-                    description: successful
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                body:
-                                    type: string
-                            required:
-                                - body
-        put:
-            summary: update reply
-            security:
-                - bearerAuth: []
-            tags:
-                - Replies
-            parameters: []
-            responses:
-                '200':
-                    description: successful
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                body:
-                                    type: string
-                            required:
-                                - body
-        delete:
-            summary: delete reply
-            security:
-                - bearerAuth: []
-            tags:
-                - Replies
-            responses:
-                '200':
-                    description: successful
-    '/api/v1/replies/{id}/like':
-        parameters:
-            - name: id
-              in: path
-              description: id
-              required: true
-              schema:
+              required:
+              - title
+              - body
+    put:
+      summary: update post
+      security:
+        - bearerAuth: []
+      tags:
+      - Posts
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
                   type: string
-            - name: Authorization
-              in: header
-              required: true
-              description: Authorization token
-              schema:
+                body:
                   type: string
-        get:
-            summary: like reply
-            security:
-                - bearerAuth: []
-            tags:
-                - Replies
-            responses:
-                '200':
-                    description: successful
+              required:
+              - title
+              - body
+    delete:
+      summary: delete post
+      security:
+        - bearerAuth: []
+      tags:
+      - Posts
+      responses:
+        '200':
+          description: successful
+  "/api/v1/posts/{id}/like":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: like post
+      security:
+        - bearerAuth: []
+      tags:
+      - Posts
+      responses:
+        '200':
+          description: successful
+  "/api/v1/replies":
+    get:
+      summary: list replies
+      tags:
+      - Replies
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create reply
+      security:
+        - bearerAuth: []
+      tags:
+      - Replies
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+                comment_id:
+                  type: string
+              required:
+              - body
+              - comment_id
+  "/api/v1/replies/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show reply
+      tags:
+      - Replies
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update reply
+      security:
+        - bearerAuth: []
+      tags:
+      - Replies
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+              required:
+              - body
+    put:
+      summary: update reply
+      security:
+        - bearerAuth: []
+      tags:
+      - Replies
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+              required:
+              - body
+    delete:
+      summary: delete reply
+      security:
+        - bearerAuth: []
+      tags:
+      - Replies
+      responses:
+        '200':
+          description: successful
+  "/api/v1/replies/{id}/like":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: like reply
+      security:
+        - bearerAuth: []
+      tags:
+      - Replies
+      responses:
+        '200':
+          description: successful
 servers:
-    - url: https://{defaultHost}
-      variables:
-          defaultHost:
-              default: blog-v4.onrender.com
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: blog-v4.onrender.com
