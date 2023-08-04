@@ -1,6 +1,6 @@
 class Api::V1::PostsController < ApplicationController
 before_action :set_post, only: %i[ like update destroy ]
-# before_action :authorize, except: :index
+before_action :authorize, except: :index
 
 def index
   @posts = Post.all
@@ -23,10 +23,6 @@ def show
 end
 
 def create
-  authorize()
-  return
-  render json: @user.inspect
-  return 
   @post = @user.posts.new(post_params)
 
   if @post.save
