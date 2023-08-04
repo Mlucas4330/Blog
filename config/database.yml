@@ -26,4 +26,4 @@ production:
   url: <%= ENV['DATABASE_URL'] %>
   database: blog_v4_hyb9
   username: lucas
-  password: <%= ENV['DB_PASS] %>
+  password: <%= ENV['DB_PASS'] %>
