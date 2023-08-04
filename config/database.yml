@@ -7,6 +7,9 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  database: blog_v4_hyb9
+  username: lucas
+  password: <%= ENV['DB_PASS'] %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
@@ -24,6 +27,3 @@ test:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
-  database: blog_v4_hyb9
-  username: lucas
-  password: <%= ENV['DB_PASS'] %>
