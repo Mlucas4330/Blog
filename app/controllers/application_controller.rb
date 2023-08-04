@@ -12,16 +12,18 @@ class ApplicationController < ActionController::API
             begin
                 JWT.decode(token, ENV['JWT_SECRET_KEY'], true, algorithm: 'HS256')
             rescue JWT::DecodeError => e
-                return render json: { errors: e.message }
+                { errors: e.message }
             end
         else
-            render json: { errors: 'Authorization header format is invalid' }
+            { errors: 'Authorization header format is invalid' }
         end
     end
 
     def authorized_user
         decoded_token = decode_token()
-        if decoded_token
+        if decoded_token[:errors]
+            json: decoded_token
+        else
             user_id = decoded_token[0]['user_id']
             @user = User.find_by(id: user_id)
         end
