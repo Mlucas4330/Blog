@@ -2,11 +2,8 @@ Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
 
-  root to: redirect('/api-docs')
-
   namespace :api do
     namespace :v1 do
-
       resources :posts, only: %i[ index create ] do
         resources :comments, only: %i[ index create ] do
           resources :replies, only: %i[ index create ]
@@ -27,8 +24,8 @@ Rails.application.routes.draw do
         registration: 'signup'
       },
       controllers: {
-        sessions: 'users/sessions',
-        registrations: 'users/registrations'
+        sessions: 'api/v1/users/sessions',
+        registrations: 'api/v1/users/registrations'
       }
     end
   end
