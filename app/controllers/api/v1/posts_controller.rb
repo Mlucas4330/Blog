@@ -23,6 +23,8 @@ def show
 end
 
 def create
+  render json: @user.inspect
+  return 
   @post = @user.posts.new(post_params)
 
   if @post.save
