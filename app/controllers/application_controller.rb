@@ -2,7 +2,7 @@ class ApplicationController < ActionController::API
     JWT_SECRET = Rails.application.secrets.secret_key_base
 
     def encode_token(payload)
-        JWT.encode(payload, JWT_SECRET)
+        JWT.encode(payload, ENV['JWT_SECRET_KEY'])
     end
 
     def decode_token
@@ -10,9 +10,9 @@ class ApplicationController < ActionController::API
         if auth_header
             token = auth_header.split(' ').last
             begin
-                JWT.decode(token, JWT_SECRET, true, algorithm: 'HS256')
+                JWT.decode(token, ENV['JWT_SECRET_KEY'], true, algorithm: 'HS256')
             rescue JWT::DecodeError => e
-                { error: 'Invalid JWT token', details: e.message }
+                { errors: e.message }
             end
         else
             'No token provided'
