@@ -77,13 +77,13 @@ paths:
                 - bearerAuth: []
             tags:
                 - Comments
-            parameters:
-                - name: Authorization
-                  in: header
-                  required: true
-                  description: Authorization token
-                  schema:
-                      type: string
+            parameters: []
+                # - name: Authorization
+                #   in: header
+                #   required: true
+                #   description: Authorization token
+                #   schema:
+                #       type: string
             responses:
                 '200':
                     description: successful
@@ -98,19 +98,19 @@ paths:
                             required:
                                 - body
     '/api/v1/comments/{id}':
-        parameters:
-            - name: id
-              in: path
-              description: id
-              required: true
-              schema:
-                  type: string
-            - name: Authorization
-              in: header
-              required: true
-              description: Authorization token
-              schema:
-                  type: string
+        parameters: []
+            # - name: id
+            #   in: path
+            #   description: id
+            #   required: true
+            #   schema:
+            #       type: string
+            # - name: Authorization
+            #   in: header
+            #   required: true
+            #   description: Authorization token
+            #   schema:
+            #       type: string
         get:
             summary: show comment
             tags:
@@ -175,12 +175,12 @@ paths:
               required: true
               schema:
                   type: string
-            - name: Authorization
-              in: header
-              required: true
-              description: Authorization token
-              schema:
-                  type: string
+            # - name: Authorization
+            #   in: header
+            #   required: true
+            #   description: Authorization token
+            #   schema:
+            #       type: string
         get:
             summary: like comment
             security:
@@ -204,13 +204,13 @@ paths:
                 - bearerAuth: []
             tags:
                 - Posts
-            parameters:
-                - name: Authorization
-                  in: header
-                  required: true
-                  description: Authorization token
-                  schema:
-                      type: string
+            # parameters:
+            #     - name: Authorization
+            #       in: header
+            #       required: true
+            #       description: Authorization token
+            #       schema:
+            #           type: string
             responses:
                 '200':
                     description: successful
@@ -235,12 +235,12 @@ paths:
               required: true
               schema:
                   type: string
-            - name: Authorization
-              in: header
-              required: true
-              description: Authorization token
-              schema:
-                  type: string
+            # - name: Authorization
+            #   in: header
+            #   required: true
+            #   description: Authorization token
+            #   schema:
+            #       type: string
         get:
             summary: show post
             tags:
@@ -311,12 +311,12 @@ paths:
               required: true
               schema:
                   type: string
-            - name: Authorization
-              in: header
-              required: true
-              description: Authorization token
-              schema:
-                  type: string
+            # - name: Authorization
+            #   in: header
+            #   required: true
+            #   description: Authorization token
+            #   schema:
+            #       type: string
         get:
             summary: like post
             tags:
@@ -351,13 +351,13 @@ paths:
                 - bearerAuth: []
             tags:
                 - Replies
-            parameters:
-                - name: Authorization
-                  in: header
-                  required: true
-                  description: Authorization token
-                  schema:
-                      type: string
+            # parameters:
+            #     - name: Authorization
+            #       in: header
+            #       required: true
+            #       description: Authorization token
+            #       schema:
+            #           type: string
             responses:
                 '200':
                     description: successful
@@ -379,12 +379,12 @@ paths:
               required: true
               schema:
                   type: string
-            - name: Authorization
-              in: header
-              required: true
-              description: Authorization token
-              schema:
-                  type: string
+            # - name: Authorization
+            #   in: header
+            #   required: true
+            #   description: Authorization token
+            #   schema:
+            #       type: string
         get:
             summary: show reply
             tags:
@@ -449,12 +449,12 @@ paths:
               required: true
               schema:
                   type: string
-            - name: Authorization
-              in: header
-              required: true
-              description: Authorization token
-              schema:
-                  type: string
+            # - name: Authorization
+            #   in: header
+            #   required: true
+            #   description: Authorization token
+            #   schema:
+            #       type: string
         get:
             summary: like reply
             security:
